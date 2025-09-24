@@ -5,12 +5,14 @@ import "dotenv/config";
 
 // importar conexao do database
 import { conexao } from "./database.js";
-import { router } from "./routes/herosRoute.js";
+import { HerosRouter } from "./routes/herosRoute.js";
+import { ViloesRouter } from "./routes/viloesRoutes.js";
 
 const app = express();
 
 app.use(express.json());
-app.use("/heros", router);
+app.use("/heros", HerosRouter);
+app.use("/viloes", ViloesRouter);
 
 // testar a conexão
 try {
