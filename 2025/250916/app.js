@@ -1,18 +1,23 @@
 import express from "express";
+import jwt from "jsonwebtoken";
 
 //ativação do reconhecimento do dotenv (arquivo com variaveis de ambiente/credenciais)
 import "dotenv/config";
 
 // importar conexao do database
 import { conexao } from "./database.js";
-import { HerosRouter } from "./routes/herosRoute.js";
-import { ViloesRouter } from "./routes/viloesRoutes.js";
+import { herosRouter } from "./routes/herosRoute.js";
+import { viloesRouter } from "./routes/viloesRoute.js";
+import { batalhaRouter } from "./routes/batalhasRoute.js";
+import { authRouter } from "./middleware/auth.js"
 
 const app = express();
 
 app.use(express.json());
-app.use("/heros", HerosRouter);
-app.use("/viloes", ViloesRouter);
+app.use("/auth", authRouter);
+app.use("/heros", herosRouter);
+app.use("/viloes", viloesRouter);
+app.use("/batalha", batalhaRouter);
 
 // testar a conexão
 try {

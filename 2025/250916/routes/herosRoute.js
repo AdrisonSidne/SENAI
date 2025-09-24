@@ -1,6 +1,8 @@
 // destructuring / desestruturação
 import { Router } from "express";
-const router = Router();
+import { login, verificarToken } from "../middleware/auth.js";
+
+const herosRouter = Router();
 
 import {
   list,
@@ -10,10 +12,10 @@ import {
   deleteById,
 } from "../controllers/herosController.js";
 
-router.get("/", list);
-router.get("/:id", listById);
-router.post("/", create);
-router.put("/:id", updateById);
-router.delete("/:id", deleteById);
+herosRouter.get("/", verificarToken, list);
+herosRouter.get("/:id", verificarToken, listById);
+herosRouter.post("/", verificarToken, create);
+herosRouter.put("/:id", verificarToken, updateById);
+herosRouter.delete("/:id", verificarToken, deleteById);
 
-export { router };
+export { herosRouter };
